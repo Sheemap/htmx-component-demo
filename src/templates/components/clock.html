@@ -1,0 +1,22 @@
+<div id="component-content">
+    <form hx-post="/components/clock" hx-target="#component-content">
+        <input id="time-display" name="clock-time" value="{{.CurrentTime}}"/>
+
+    <button hx-on:click="clearInterval(intervalHandle)">Guh</button>
+
+        </form>
+
+    <script>
+    let intervalHandle = null;
+
+     function advanceClock(){
+        const display = document.getElementById("time-display");
+        const currentTime = parseInt(display.value)
+        display.value = currentTime - 1;
+     }
+
+     htmx.onLoad(() => {
+         intervalHandle = setInterval(advanceClock, 1000)
+     })
+    </script>
+</div>
